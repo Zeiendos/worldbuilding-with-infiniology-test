@@ -1,0 +1,1316 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Infiniology: Reimagining Dualities Through Scientific Inquiry</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --primary: #2c1810;
+            --secondary: #4a3426;
+            --accent: #8b5a3c;
+            --neutral: #f5f1eb;
+            --base: #fefcf9;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--base);
+            color: var(--primary);
+            line-height: 1.7;
+        }
+        
+        .serif { font-family: 'Crimson Text', serif; }
+        
+        .toc-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background: var(--neutral);
+            border-right: 1px solid #e5e1db;
+            overflow-y: auto;
+            z-index: 50;
+            padding: 2rem 1.5rem;
+        }
+        
+        .main-content {
+            margin-left: 280px;
+            min-height: 100vh;
+        }
+        
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+            min-height: 60vh;
+        }
+        
+        .citation {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted var(--accent);
+        }
+        
+        .citation:hover {
+            background: rgba(139, 90, 60, 0.1);
+        }
+        
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--accent), transparent);
+            margin: 4rem 0;
+        }
+        
+        .pullquote {
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--secondary);
+            border-left: 4px solid var(--accent);
+            padding-left: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .toc-link {
+            display: block;
+            padding: 0.5rem 0;
+            color: var(--secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        
+        .toc-link:hover, .toc-link.active {
+            color: var(--accent);
+        }
+        
+        .toc-link.sub {
+            padding-left: 1rem;
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+        
+        .mermaid-container {
+            display: flex;
+            justify-content: center;
+            min-height: 300px;
+            max-height: 800px;
+            background: var(--base);
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mermaid-container .mermaid {
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            cursor: grab;
+            transition: transform 0.3s ease;
+            transform-origin: center center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            touch-action: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        .mermaid-container .mermaid svg {
+            max-width: 100%;
+            height: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .mermaid-container .mermaid:active {
+            cursor: grabbing;
+        }
+        
+        .mermaid-container.zoomed .mermaid {
+            height: 100%;
+            width: 100%;
+            cursor: grab;
+        }
+        
+        .mermaid-controls {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .mermaid-control-btn {
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #374151;
+            font-size: 14px;
+            min-width: 36px;
+            height: 36px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .mermaid-control-btn:hover {
+            background: #f8fafc;
+            border-color: #3b82f6;
+            color: #3b82f6;
+            transform: translateY(-1px);
+        }
+        
+        .mermaid-control-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .mermaid-title {
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        @media (max-width: 1024px) {
+            .toc-fixed {
+                display: none;
+                transform: translateX(-100%);
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .mermaid-control-btn:not(.reset-zoom) {
+                display: none;
+            }
+            .mermaid-controls {
+                top: auto;
+                bottom: 15px;
+                right: 15px;
+            }
+        }
+    </style>
+    <base target="_blank"/>
+  <base target="_blank">
+</head>
+
+  <body>
+    <!-- Fixed Table of Contents -->
+    <nav class="toc-fixed">
+      <h3 class="serif text-lg font-semibold mb-4 text-primary">Contents</h3>
+      <div class="space-y-1">
+        <a href="#introduction" class="toc-link">Introduction</a>
+        <a href="#matter-energy" class="toc-link">Mass &amp; Energy</a>
+        <a href="#matter-energy" class="toc-link sub">Einstein&#39;s Equivalence</a>
+        <a href="#quantum-duality" class="toc-link sub">Quantum Perspective</a>
+        <a href="#structure-entropy" class="toc-link">Structure &amp; Entropy</a>
+        <a href="#thermodynamics" class="toc-link sub">Thermodynamics</a>
+        <a href="#complex-systems" class="toc-link sub">Complex Systems</a>
+        <a href="#entangled-independent" class="toc-link">Entangled &amp; Independent</a>
+        <a href="#quantum-entanglement" class="toc-link sub">Quantum Entanglement</a>
+        <a href="#classical-independence" class="toc-link sub">Classical Independence</a>
+        <a href="#creation-cessation" class="toc-link">Creation &amp; Cessation</a>
+        <a href="#cosmic-cycles" class="toc-link sub">Cosmic Cycles</a>
+        <a href="#biological-cycles" class="toc-link sub">Biological Cycles</a>
+        <a href="#emotion-indifference" class="toc-link">Emotion &amp; Indifference</a>
+        <a href="#neurobiology" class="toc-link sub">Neurobiology</a>
+        <a href="#psychology" class="toc-link sub">Psychology</a>
+        <a href="#awareness-ignorance" class="toc-link">Awareness &amp; Ignorance</a>
+        <a href="#consciousness" class="toc-link sub">Consciousness</a>
+        <a href="#information-theory" class="toc-link sub">Information Theory</a>
+        <a href="#conclusion" class="toc-link">Conclusion</a>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Hero Section -->
+      <section class="px-8 py-12 bg-gradient-to-br from-neutral-50 to-neutral-100">
+        <div class="max-w-6xl mx-auto">
+          <div class="hero-grid">
+            <div class="space-y-6">
+              <h1 class="serif text-5xl lg:text-6xl font-semibold text-primary leading-tight">
+                <em class="text-accent">Infiniology:</em>
+                <br/>
+                Reimagining Dualities
+                <br/>
+                Through Scientific Inquiry
+              </h1>
+              <p class="text-xl text-secondary leading-relaxed">
+                A scientific framework for understanding the limits of infinity through the study of fundamental dualities, transforming philosophical concepts into quantifiable, empirical science.
+              </p>
+              <div class="flex flex-wrap gap-4 text-sm text-secondary">
+                <span class="flex items-center gap-2">
+                  <i class="fas fa-atom"></i> Physics
+                </span>
+                <span class="flex items-center gap-2">
+                  <i class="fas fa-dna"></i> Biology
+                </span>
+                <span class="flex items-center gap-2">
+                  <i class="fas fa-brain"></i> Neuroscience
+                </span>
+                <span class="flex items-center gap-2">
+                  <i class="fas fa-network-wired"></i> Information Theory
+                </span>
+              </div>
+            </div>
+            <div class="relative">
+              <img src="https://kimi-web-img.moonshot.cn/img/bigthink.com/1e19f237d75699401b9b940ea096dbf3ab01056b.jpg" alt="Abstract visualization of interconnected cosmic networks" class="w-full h-80 object-cover rounded-lg shadow-lg" size="medium" aspect="wide" query="cosmic interconnectedness abstract" referrerpolicy="no-referrer" data-modified="1" data-score="0.00"/>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Introduction -->
+      <section id="introduction" class="px-8 py-16">
+        <div class="max-w-4xl mx-auto">
+          <div class="prose prose-lg max-w-none">
+            <p class="text-xl leading-relaxed mb-8">
+              Infiniology represents a novel scientific framework that reimagines traditional philosophical dualities through the lens of modern science. As a <strong>&#34;study of the limits of infinity,&#34;</strong> it seeks to observe, measure, and comprehend the boundaries of the physical laws that constitute reality, moving beyond abstract philosophical interpretations to ground its explorations in quantifiable, empirical methods.
+            </p>
+
+            <div class="pullquote serif">
+              This report synthesizes findings from physics, biology, neuroscience, and information theory to demonstrate how these reimagined dualities offer a more accurate and unified model of reality, revealing a cosmos characterized by dynamic interplay, cyclical processes, and interconnectedness rather than simple opposition.
+            </div>
+
+            <p class="text-lg leading-relaxed mt-8">
+              The central methodology involves systematically transforming traditional dualities—&#34;Matter &amp; Spirit,&#34; &#34;Order &amp; Chaos,&#34; &#34;Life &amp; Death&#34;—into scientifically grounded concepts like &#34;Mass &amp; Energy,&#34; &#34;Structure &amp; Entropy,&#34; and &#34;Creation &amp; Cessation.&#34; This shift moves discussions from theological and philosophical domains into the quantifiable frameworks of physics, thermodynamics, and cosmology.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- Mass &amp; Energy Section -->
+      <section id="matter-energy" class="px-8 py-16 bg-neutral-50">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="serif text-4xl font-semibold text-primary mb-8">Matter &amp; Spirit → Mass &amp; Energy</h2>
+          <h3 class="serif text-2xl font-medium text-secondary mb-6">The Foundation of Physical Reality</h3>
+
+          <div class="grid lg:grid-cols-3 gap-8 mb-12">
+            <div class="lg:col-span-2">
+              <p class="text-lg leading-relaxed mb-6">
+                The reimagining of the traditional duality of &#34;Matter &amp; Spirit&#34; into &#34;Mass &amp; Energy&#34; represents a fundamental shift from metaphysical distinction to quantifiable relationship. This transformation moves the concept from philosophical debate to the empirical framework of modern physics, where Einstein&#39;s equation <strong>E=mc²</strong> establishes a precise mathematical relationship between mass and energy.
+              </p>
+
+              <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                <h4 class="font-semibold text-primary mb-3">Einstein&#39;s Mass-Energy Equivalence</h4>
+                <p class="text-secondary mb-4">
+                  The cornerstone of the Mass-Energy duality is Albert Einstein&#39;s famous equation, E=mc², which demonstrates that mass and energy are not distinct entities but different forms of the same substance. The speed of light (c) acts as the conversion factor, explaining why tiny amounts of mass can release enormous energy.
+                </p>
+                <p class="text-sm text-secondary">
+                  <a href="https://study.com/academy/lesson/mass-energy-equivalence-definition-history-examples.html" class="citation">Source: Mass-Energy Equivalence Theory</a>
+                </p>
+              </div>
+            </div>
+
+            <div class="space-y-4">
+              <div class="bg-white p-4 rounded-lg shadow-sm">
+                <h5 class="font-medium text-primary mb-2">Nuclear Fission</h5>
+                <p class="text-sm text-secondary">Converts about 0.1% of mass into energy</p>
+              </div>
+              <div class="bg-white p-4 rounded-lg shadow-sm">
+                <h5 class="font-medium text-primary mb-2">Solar Fusion</h5>
+                <p class="text-sm text-secondary">4 million tons of mass → energy every second</p>
+              </div>
+              <div class="bg-white p-4 rounded-lg shadow-sm">
+                <h5 class="font-medium text-primary mb-2">PET Scans</h5>
+                <p class="text-sm text-secondary">Medical application of mass-energy conversion</p>
+              </div>
+            </div>
+          </div>
+
+          <div id="quantum-duality" class="bg-white p-8 rounded-lg shadow-sm">
+            <h3 class="serif text-2xl font-medium text-secondary mb-6">Energy-Matter Duality in Quantum Physics</h3>
+
+            <div class="grid md:grid-cols-2 gap-8">
+              <div>
+                <h4 class="font-semibold text-primary mb-4">Wave-Particle Duality</h4>
+                <p class="text-secondary mb-4">
+                  Every particle or quantum entity can exhibit both particle-like and wave-like behavior. Light, traditionally thought of as a wave, can behave as photons, while particles like electrons can exhibit wave-like properties.
+                </p>
+                <p class="text-sm text-secondary">
+                  <a href="https://dualityscience.com/yahoo_site_admin/assets/docs/cdgo2007_PDF.21362207.pdf" class="citation">Source: Quantum Duality Theory</a>
+                </p>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-primary mb-4">Quantum Field Theory</h4>
+                <p class="text-secondary mb-4">
+                  Particles are not fundamental building blocks but excitations in underlying quantum fields that permeate all spacetime. An electron is an excitation in the electron field, a photon in the electromagnetic field.
+                </p>
+                <p class="text-sm text-secondary">
+                  <a href="https://www.thymindoman.com/the-unification-of-mass-energy-and-spacetime/" class="citation">Source: Quantum Field Theory</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- Structure &amp; Entropy Section -->
+      <section id="structure-entropy" class="px-8 py-16">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="serif text-4xl font-semibold text-primary mb-8">Order &amp; Chaos → Structure &amp; Entropy</h2>
+          <h3 class="serif text-2xl font-medium text-secondary mb-6">The Dynamics of Systems</h3>
+
+          <div class="mb-12">
+            <p class="text-lg leading-relaxed mb-6">
+              The transformation from &#34;Order &amp; Chaos&#34; to &#34;Structure &amp; Entropy&#34; represents a shift from qualitative philosophical perspective to quantitative scientific framework. Structure refers to organized patterns within systems, while entropy measures disorder or randomness.
+            </p>
+          </div>
+
+          <div id="thermodynamics" class="bg-neutral-50 p-8 rounded-lg mb-8">
+            <h3 class="serif text-2xl font-medium text-secondary mb-6">Entropy as a Measure of Disorder</h3>
+
+            <div class="grid md:grid-cols-2 gap-8">
+              <div>
+                <h4 class="font-semibold text-primary mb-4">The Second Law of Thermodynamics</h4>
+                <p class="text-secondary mb-4">
+                  The total entropy of an isolated system will always increase over time, providing the scientific foundation for the &#34;arrow of time&#34; and explaining why processes like a cooling cup of coffee are irreversible.
+                </p>
+
+                <div class="bg-white p-4 rounded-lg mb-4">
+                  <h5 class="font-medium text-primary mb-2">Statistical Mechanics</h5>
+                  <p class="text-sm text-secondary">
+                    Entropy is precisely defined as S = k_B ln(Ω), where Ω is the number of microscopic configurations consistent with a system&#39;s macroscopic properties.
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <img src="https://kimi-web-img.moonshot.cn/img/www.chemistrystudent.com/05d05d4c0b14ef0ef80da2ed9b068cd26777f9d1.png" alt="Visualization of increasing entropy in a physical system" class="w-full h-48 object-cover rounded-lg" size="medium" aspect="wide" query="entropy visualization" referrerpolicy="no-referrer" data-modified="1" data-score="0.00"/>
+              </div>
+            </div>
+          </div>
+
+          <div id="complex-systems" class="bg-white p-8 rounded-lg shadow-sm">
+            <h3 class="serif text-2xl font-medium text-secondary mb-6">Structure Formation in Complex Systems</h3>
+
+            <div class="grid lg:grid-cols-3 gap-6">
+              <div class="bg-neutral-50 p-6 rounded-lg">
+                <h4 class="font-semibold text-primary mb-3">Self-Organization</h4>
+                <p class="text-sm text-secondary mb-3">
+                  Systems far from equilibrium spontaneously develop complex, ordered structures without external guidance.
+                </p>
+                <p class="text-xs text-secondary">
+                  Example: Bénard convection cells in heated fluids
+                </p>
+              </div>
+
+              <div class="bg-neutral-50 p-6 rounded-lg">
+                <h4 class="font-semibold text-primary mb-3">Biological Systems</h4>
+                <p class="text-sm text-secondary mb-3">
+                  Living organisms maintain low-entropy structure by consuming energy and releasing high-entropy waste.
+                </p>
+                <p class="text-xs text-secondary">
+                  Process: Metabolism as entropy management
+                </p>
+              </div>
+
+              <div class="bg-neutral-50 p-6 rounded-lg">
+                <h4 class="font-semibold text-primary mb-3">Network Theory</h4>
+                <p class="text-sm text-secondary mb-3">
+                  Structural entropy quantifies complexity in networks from citation patterns to neural connections.
+                </p>
+                <p class="text-xs text-secondary">
+                  <a href="https://arxiv.org/html/2503.20543v1" class="citation">Source: Network Theory Research</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- Entangled &amp; Independent Section -->
+      <section id="entangled-independent" class="px-8 py-16 bg-neutral-50">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="serif text-4xl font-semibold text-primary mb-8">Male &amp; Female → Entangled &amp; Independent</h2>
+          <h3 class="serif text-2xl font-medium text-secondary mb-6">Quantum Interconnectedness</h3>
+
+          <div class="mb-12">
+            <p class="text-lg leading-relaxed mb-6">
+              The reimagining of &#34;Male &amp; Female&#34; into &#34;Entangled &amp; Independent&#34; shifts from biological distinction to fundamental quantum principle. Entanglement describes particles whose fates are intertwined regardless of distance, challenging classical notions of separateness.
+            </p>
+          </div>
+
+          <div id="quantum-entanglement" class="bg-white p-8 rounded-lg shadow-sm mb-8">
+            <h3 class="serif text-2xl font-medium text-secondary mb-6">Quantum Entanglement as Fundamental Phenomenon</h3>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+              <div>
+                <h4 class="font-semibold text-primary mb-4">Bell&#39;s Theorem</h4>
+                <p class="text-secondary mb-4">
+                  John Bell&#39;s 1964 theorem transformed the philosophical debate into a testable scientific question, providing mathematical inequalities that any local hidden variable theory must obey—inequalities violated by quantum mechanics.
+                </p>
+                <p class="text-sm text-secondary">
+                  <a href="https://www.spinquanta.com/news-detail/quantum-entanglement-theory-a-complete-guide" class="citation">Source: Quantum Entanglement Theory</a>
+                </p>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-primary mb-4">Non-Locality</h4>
+                <p class="text-secondary mb-4">
+                  Measurement of one entangled particle instantaneously influences its partner, regardless of spatial separation—&#34;spooky action at a distance&#34; that challenges classical causality.
+                </p>
+                <p class="text-xs text-secondary">
+                  2022 Nobel Prize awarded to Aspect, Clauser, and Zeilinger for entanglement experiments
+                </p>
+              </div>
+            </div>
+
+            <div class="bg-neutral-50 p-6 rounded-lg">
+              <h4 class="font-semibold text-primary mb-4">Quantum Technology Applications</h4>
+              <div class="grid md:grid-cols-3 gap-4 text-sm">
+                <div>
+                  <strong>Quantum Computing:</strong> Exponential computational speedup through entangled qubits
+                </div>
+                <div>
+                  <strong>Quantum Cryptography:</strong> Unbreakable codes based on entanglement principles
+                </div>
+                <div>
+                  <strong>Quantum Sensing:</strong> Measurement precision beyond classical limits
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="classical-independence" class="bg-white p-8 rounded-lg shadow-sm">
+            <h3 class="serif text-2xl font-medium text-secondary mb-6">Independence as Classical Approximation</h3>
+
+            <div class="space-y-6">
+              <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                  <h4 class="font-semibold text-primary mb-4">Decoherence Process</h4>
+                  <p class="text-secondary mb-4">
+                    Quantum systems lose coherence through environmental interactions, explaining why macroscopic objects appear independent while fundamentally being quantum systems.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 class="font-semibold text-primary mb-4">Quantum Measurement Problem</h4>
+                  <p class="text-secondary mb-4">
+                    Wavefunction collapse remains a fundamental puzzle in physics, with different interpretations offering various solutions to how quantum superposition becomes classical definiteness.
+                  </p>
+                </div>
+              </div>
+
+              <div class="bg-neutral-50 p-6 rounded-lg">
+                <h4 class="font-semibold text-primary mb-4">Classical Emergence</h4>
+                <p class="text-secondary">
+                  Independence emerges from quantum entanglement through decoherence, showing that classical physics is not fundamental but an approximation emerging from underlying quantum reality.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- Creation &amp; Cessation Section -->
+      <section id="creation-cessation" class="px-8 py-16">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="serif text-4xl font-semibold text-primary mb-8">Life &amp; Death → Creation &amp; Cessation</h2>
+          <h3 class="serif text-2xl font-medium text-secondary mb-6">Cyclical Processes in the Universe</h3>
+
+          <div class="mb-12">
+            <p class="text-lg leading-relaxed mb-6">
+              The reimagining of &#34;Life &amp; Death&#34; as &#34;Creation &amp; Cessation&#34; shifts focus from biological endpoint to universal cyclical dynamic. These processes are deeply intertwined, with cessation in one form enabling creation in another.
+            </p>
+          </div>
+
+          <div id="cosmic-cycles" class="bg-neutral-50 p-8 rounded-lg mb-8">
+            <h3 class="serif text-2xl font-medium text-secondary mb-6">Cosmological Models of Creation and Cessation</h3>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+              <div>
+                <h4 class="font-semibold text-primary mb-4">Big Bang Creation</h4>
+                <p class="text-secondary mb-4">
+                  The universe began approximately 13.8 billion years ago from an extremely hot, dense state. The initial period of exponential expansion was followed by cooling and formation of fundamental particles.
+                </p>
+                <p class="text-sm text-secondary">
+                  <a href="https://www.telegraphindia.com/india/big-bang-and-cycle-of-creation-and-destruction/cid/1828536" class="citation">Source: Big Bang Theory</a>
+                </p>
+              </div>
+
+              <div>
+                <img src="https://kimi-web-img.moonshot.cn/img/upload.wikimedia.org/1a83be3fa895b1c32e2dca5a7dc04fc311e36929.jpg" alt="Visualization of the Big Bang universe creation event" class="w-full h-48 object-cover rounded-lg" size="medium" aspect="wide" query="big bang universe creation" referrerpolicy="no-referrer" data-modified="1" data-score="0.00"/>
+              </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg">
+              <h4 class="font-semibold text-primary mb-4">Cyclic Universe Models</h4>
+              <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                  <thead>
+                    <tr class="border-b">
+                      <th class="text-left py-2 font-medium text-primary">Model</th>
+                      <th class="text-left py-2 font-medium text-primary">Mechanism</th>
+                      <th class="text-left py-2 font-medium text-primary">Entropy Solution</th>
+                    </tr>
+                  </thead>
+                  <tbody class="text-secondary">
+                    <tr class="border-b">
+                      <td class="py-2 font-medium">Early Oscillating Universe</td>
+                      <td class="py-2">Gravitational contraction → Big Crunch → Big Bang</td>
+                      <td class="py-2">None; entropy increases per cycle</td>
+                    </tr>
+                    <tr class="border-b">
+                      <td class="py-2 font-medium">Steinhardt–Turok Model</td>
+                      <td class="py-2">Collision of parallel branes in higher-dimensional space</td>
+                      <td class="py-2">Net expansion dilutes entropy</td>
+                    </tr>
+                    <tr>
+                      <td class="py-2 font-medium">Baum–Frampton Model</td>
+                      <td class="py-2">Universe contracts before Big Rip, retaining dark energy</td>
+                      <td class="py-2">Universe &#34;comes back empty&#34;</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="text-xs text-secondary mt-4">
+                <a href="https://en.wikipedia.org/wiki/Cyclic_model" class="citation">Source: Cyclic Universe Models</a>
+              </p>
+            </div>
+          </div>
+
+          <div id="biological-cycles" class="bg-white p-8 rounded-lg shadow-sm">
+            <h3 class="serif text-2xl font-medium text-secondary mb-6">Biological Cycles of Creation and Cessation</h3>
+
+            <div class="grid lg:grid-cols-3 gap-6">
+              <div class="bg-neutral-50 p-6 rounded-lg">
+                <h4 class="font-semibold text-primary mb-3">Cellular Processes</h4>
+                <p class="text-sm text-secondary mb-3">
+                  <strong>Mitosis:</strong> Cell division creating identical daughter cells
+                </p>
+                <p class="text-sm text-secondary mb-3">
+                  <strong>Apoptosis:</strong> Programmed cell death maintaining tissue balance
+                </p>
+                <p class="text-xs text-secondary">
+                  <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC1550296/" class="citation">Source: Cell Cycle Research</a>
+                </p>
+              </div>
+
+              <div class="bg-neutral-50 p-6 rounded-lg">
+                <h4 class="font-semibold text-primary mb-3">Evolutionary Cycles</h4>
+                <p class="text-sm text-secondary mb-3">
+                  <strong>Speciation:</strong> Creation of new species through genetic variation
+                </p>
+                <p class="text-sm text-secondary mb-3">
+                  <strong>Extinction:</strong> Cessation of species enabling new evolutionary paths
+                </p>
+                <p class="text-xs text-secondary">
+                  Example: Dinosaur extinction enabled mammal diversification
+                </p>
+              </div>
+
+              <div class="bg-neutral-50 p-6 rounded-lg">
+                <h4 class="font-semibold text-primary mb-3">Abiogenesis</h4>
+                <p class="text-sm text-secondary mb-3">
+                  The ultimate act of creation: life arising from non-living matter through chemical evolution
+                </p>
+                <p class="text-xs text-secondary">
+                  <a href="https://www.britannica.com/science/abiogenesis" class="citation">Source: Abiogenesis Theory</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- Emotion &amp; Indifference Section -->
+      <section id="emotion-indifference" class="px-8 py-16 bg-neutral-50">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="serif text-4xl font-semibold text-primary mb-8">Love &amp; Hate → Emotion &amp; Indifference</h2>
+          <h3 class="serif text-2xl font-medium text-secondary mb-6">The Spectrum of Human Experience</h3>
+
+          <div class="mb-12">
+            <p class="text-lg leading-relaxed mb-6">
+              This reimagining shifts focus from specific intense affections to underlying capacity for emotional experience. Research shows love and hate share neural circuitry; the true opposite of both is indifference—a state characterized by absence of emotional engagement.
+            </p>
+          </div>
+
+          <div id="neurobiology" class="bg-white p-8 rounded-lg shadow-sm mb-8">
+            <h3 class="serif text-2xl font-medium text-secondary mb-6">The Neurobiology of Emotion</h3>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+              <div>
+                <h4 class="font-semibold text-primary mb-4">Shared Neural Substrates</h4>
+                <p class="text-secondary mb-4">
+                  fMRI studies reveal that love and hate activate overlapping brain regions, particularly the putamen and insula, suggesting they&#39;re processed by shared neural networks rather than separate modules.
+                </p>
+                <p class="text-sm text-secondary">
+                  <a href="https://www.oxfordstudent.com/2018/02/16/really-thin-line-love-hate-scientists-explore-age-old-question/" class="citation">Source: Love-Hate Neural Research</a>
+                </p>
+              </div>
+
+              <div>
+                <img src="https://kimi-web-img.moonshot.cn/img/www.neuroanatomy.ca/329df62ee6799de21b3526d254c28e88fbe68e33.png" alt="Human brain limbic system diagram" class="w-full h-48 object-cover rounded-lg" size="medium" aspect="wide" query="brain limbic system diagram" referrerpolicy="no-referrer" data-modified="1" data-score="0.00"/>
+              </div>
+            </div>
+
+            <div class="bg-neutral-50 p-6 rounded-lg">
+              <h4 class="font-semibold text-primary mb-4">Neurochemical Basis</h4>
+              <div class="grid md:grid-cols-3 gap-4 text-sm">
+                <div>
+                  <strong>Dopamine:</strong> Reward system activation in both love and hate, particularly in revenge motivation
+                </div>
+                <div>
+                  <strong>Serotonin:</strong> Lower levels in obsessive love, higher in stable attachment
+                </div>
+                <div>
+                  <strong>Oxytocin:</strong> &#34;Love hormone&#34; promoting trust and bonding, absence linked to dehumanization
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="psychology" class="bg-white p-8 rounded-lg shadow-sm">
+            <h3 class="serif text-2xl font-medium text-secondary mb-6">The Psychology of Indifference</h3>
+
+            <div class="space-y-6">
+              <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                  <h4 class="font-semibold text-primary mb-4">Apathy vs. Depression</h4>
+                  <p class="text-secondary mb-4">
+                    Apathy is distinct from depression—while depression involves dysregulated emotion, apathy involves diminished emotional capacity. Alzheimer&#39;s patients show reduced responses to both pleasant and unpleasant stimuli.
+                  </p>
+                  <p class="text-sm text-secondary">
+                    <a href="https://psychiatryonline.org/doi/10.1176/jnp.2010.22.2.236" class="citation">Source: Alzheimer&#39;s Emotional Response Study</a>
+                  </p>
+                </div>
+
+                <div>
+                  <h4 class="font-semibold text-primary mb-4">Social Impact</h4>
+                  <p class="text-secondary mb-4">
+                    Expressions of indifference damage cooperation more than expressions of anger. Indifference lowers expectations about collaboration and generates negative emotions in observers.
+                  </p>
+                  <p class="text-sm text-secondary">
+                    <a href="https://spsp.org/news/character-and-context-blog/cohen-chen-expressing-indifference-in-conflict" class="citation">Source: Conflict Indifference Research</a>
+                  </p>
+                </div>
+              </div>
+
+              <div class="bg-neutral-50 p-6 rounded-lg">
+                <h4 class="font-semibold text-primary mb-4">Cognitive Factors</h4>
+                <p class="text-secondary">
+                  Indifference arises when events are appraised as irrelevant to one&#39;s goals. Individual differences in self-esteem and emotional regulation influence vulnerability to emotional swings versus stable indifference.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- Awareness &amp; Ignorance Section -->
+      <section id="awareness-ignorance" class="px-8 py-16">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="serif text-4xl font-semibold text-primary mb-8">Light &amp; Darkness → Awareness &amp; Ignorance</h2>
+          <h3 class="serif text-2xl font-medium text-secondary mb-6">Consciousness and Knowledge</h3>
+
+          <div class="mb-12">
+            <p class="text-lg leading-relaxed mb-6">
+              This transformation shifts from physical contrast to cognitive and epistemological duality. &#34;Awareness&#34; represents conscious perception and understanding, while &#34;Ignorance&#34; signifies information absence or misinformation.
+            </p>
+          </div>
+
+          <div id="consciousness" class="bg-neutral-50 p-8 rounded-lg mb-8">
+            <h3 class="serif text-2xl font-medium text-secondary mb-6">Awareness and the Science of Consciousness</h3>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+              <div>
+                <h4 class="font-semibold text-primary mb-4">Neural Correlates of Consciousness</h4>
+                <p class="text-secondary mb-4">
+                  Leading theories include the Global Neuronal Workspace Hypothesis (information broadcasting) and Integrated Information Theory (consciousness as integrated information Φ).
+                </p>
+                <p class="text-sm text-secondary">
+                  <a href="https://parisbraininstitute.org/brain-function-cards/consciousness" class="citation">Source: Consciousness Research</a>
+                </p>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-primary mb-4">Quantum Observer Effect</h4>
+                <p class="text-secondary mb-4">
+                  Observation fundamentally changes quantum systems, raising questions about consciousness&#39;s role in reality creation and the relationship between awareness and physical existence.
+                </p>
+                <p class="text-sm text-secondary">
+                  <a href="https://pubs.aip.org/aip/adv/article/15/11/115319/3372193/Universal-consciousness-as-foundational-field-A" class="citation">Source: Quantum Observer Effect</a>
+                </p>
+              </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg">
+              <h4 class="font-semibold text-primary mb-4">Philosophical Models</h4>
+              <div class="grid md:grid-cols-2 gap-6 text-sm">
+                <div>
+                  <strong>Naturalistic Dualism:</strong> Consciousness as fundamental property, not reducible to physical processes
+                </div>
+                <div>
+                  <strong>Metacognition:</strong> &#34;Thinking about thinking&#34; as higher-order awareness linked to frontopolar cortex
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="information-theory" class="bg-white p-8 rounded-lg shadow-sm">
+            <h3 class="serif text-2xl font-medium text-secondary mb-6">Ignorance as Quantifiable Uncertainty</h3>
+
+            <div class="space-y-6">
+              <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-neutral-50 p-6 rounded-lg">
+                  <h4 class="font-semibold text-primary mb-3">Information Theory</h4>
+                  <p class="text-sm text-secondary mb-3">
+                    Shannon entropy quantifies &#34;ignorance&#34; as missing information, providing mathematical framework for uncertainty.
+                  </p>
+                  <p class="text-xs text-secondary">
+                    <a href="https://arxiv.org/pdf/2107.05008" class="citation">Source: Information Theory</a>
+                  </p>
+                </div>
+
+                <div class="bg-neutral-50 p-6 rounded-lg">
+                  <h4 class="font-semibold text-primary mb-3">Dunning-Kruger Effect</h4>
+                  <p class="text-sm text-secondary mb-3">
+                    Metacognitive failure where incompetent individuals overestimate their competence due to ignorance of their own ignorance.
+                  </p>
+                  <p class="text-xs text-secondary">
+                    <a href="https://www.linkedin.com/pulse/navigating-dual-faces-ignorance-robel-brook-bbe2f" class="citation">Source: Cognitive Bias Research</a>
+                  </p>
+                </div>
+
+                <div class="bg-neutral-50 p-6 rounded-lg">
+                  <h4 class="font-semibold text-primary mb-3">Cognitive Biases</h4>
+                  <p class="text-sm text-secondary mb-3">
+                    Ignorance drives systematic decision-making errors through heuristics like availability bias and confirmation bias.
+                  </p>
+                  <p class="text-xs text-secondary">
+                    <a href="https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2023.1025507/full" class="citation">Source: Cognitive Bias Studies</a>
+                  </p>
+                </div>
+              </div>
+
+              <div class="pullquote serif mt-8">
+                &#34;Understanding the pervasive role of ignorance in shaping cognitive processes is the first step toward developing strategies to counteract biases, such as actively seeking disconfirming evidence and cultivating intellectual humility.&#34;
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- Interconnectedness Visualization -->
+      <section class="px-8 py-16 bg-neutral-50">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="serif text-4xl font-semibold text-primary mb-8 text-center">Interconnected Duality Framework</h2>
+
+          <div class="mermaid-title">Unified Scientific Framework of Reimagined Dualities</div>
+          <div class="mermaid-container">
+            <div class="mermaid-controls">
+              <button class="mermaid-control-btn zoom-in" title="放大">
+                <i class="fas fa-search-plus"></i>
+              </button>
+              <button class="mermaid-control-btn zoom-out" title="缩小">
+                <i class="fas fa-search-minus"></i>
+              </button>
+              <button class="mermaid-control-btn reset-zoom" title="重置">
+                <i class="fas fa-expand-arrows-alt"></i>
+              </button>
+              <button class="mermaid-control-btn fullscreen" title="全屏查看">
+                <i class="fas fa-expand"></i>
+              </button>
+            </div>
+            <div class="mermaid">
+              graph TD
+              A[&#34;Traditional Dualities&#34;] --&gt; B[&#34;Mass &amp; Energy&#34;]
+              A --&gt; C[&#34;Structure &amp; Entropy&#34;]
+              A --&gt; D[&#34;Entangled &amp; Independent&#34;]
+              A --&gt; E[&#34;Creation &amp; Cessation&#34;]
+              A --&gt; F[&#34;Emotion &amp; Indifference&#34;]
+              A --&gt; G[&#34;Awareness &amp; Ignorance&#34;]
+
+              B --&gt; H[&#34;Physics&#34;]
+              C --&gt; I[&#34;Thermodynamics&#34;]
+              D --&gt; J[&#34;Quantum Mechanics&#34;]
+              E --&gt; K[&#34;Cosmology &amp; Biology&#34;]
+              F --&gt; L[&#34;Neuroscience&#34;]
+              G --&gt; M[&#34;Consciousness &amp; Information Theory&#34;]
+
+              H --&gt; N[&#34;Unified Framework&#34;]
+              I --&gt; N
+              J --&gt; N
+              K --&gt; N
+              L --&gt; N
+              M --&gt; N
+
+              style A fill:#2c1810,stroke:#2c1810,stroke-width:3px,color:#ffffff,font-weight:bold
+              style N fill:#4a3426,stroke:#4a3426,stroke-width:3px,color:#ffffff,font-weight:bold
+              style B fill:#8b5a3c,stroke:#8b5a3c,stroke-width:2px,color:#ffffff,font-weight:bold
+              style C fill:#8b5a3c,stroke:#8b5a3c,stroke-width:2px,color:#ffffff,font-weight:bold
+              style D fill:#8b5a3c,stroke:#8b5a3c,stroke-width:2px,color:#ffffff,font-weight:bold
+              style E fill:#8b5a3c,stroke:#8b5a3c,stroke-width:2px,color:#ffffff,font-weight:bold
+              style F fill:#8b5a3c,stroke:#8b5a3c,stroke-width:2px,color:#ffffff,font-weight:bold
+              style G fill:#8b5a3c,stroke:#8b5a3c,stroke-width:2px,color:#ffffff,font-weight:bold
+              style H fill:#f5f1eb,stroke:#4a3426,stroke-width:2px,color:#2c1810,font-weight:600
+              style I fill:#f5f1eb,stroke:#4a3426,stroke-width:2px,color:#2c1810,font-weight:600
+              style J fill:#f5f1eb,stroke:#4a3426,stroke-width:2px,color:#2c1810,font-weight:600
+              style K fill:#f5f1eb,stroke:#4a3426,stroke-width:2px,color:#2c1810,font-weight:600
+              style L fill:#f5f1eb,stroke:#4a3426,stroke-width:2px,color:#2c1810,font-weight:600
+              style M fill:#f5f1eb,stroke:#4a3426,stroke-width:2px,color:#2c1810,font-weight:600
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- Conclusion -->
+      <section id="conclusion" class="px-8 py-16">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="serif text-4xl font-semibold text-primary mb-8 text-center">Synthesis and Implications</h2>
+
+          <div class="prose prose-lg max-w-none">
+            <p class="text-xl leading-relaxed mb-8">
+              The Infiniology framework presents a unified model of reality based on the reimagining of traditional dualities through the lens of modern science. This interconnected web of relationships reveals a cosmos that is not a collection of separate and distinct objects but a single, interconnected whole, where the laws of nature are in constant interplay.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+              <div class="bg-neutral-50 p-6 rounded-lg">
+                <h3 class="font-semibold text-primary mb-4">Key Scientific Insights</h3>
+                <ul class="space-y-2 text-secondary">
+                  <li>• Mass and energy are interconvertible forms of the same substance</li>
+                  <li>• Local structure emerges through entropy export</li>
+                  <li>• Quantum entanglement challenges classical separateness</li>
+                  <li>• Cosmic and biological cycles are deeply interconnected</li>
+                  <li>• Emotion and indifference represent a spectrum of engagement</li>
+                  <li>• Awareness actively participates in reality formation</li>
+                </ul>
+              </div>
+
+              <div class="bg-neutral-50 p-6 rounded-lg">
+                <h3 class="font-semibold text-primary mb-4">Interdisciplinary Connections</h3>
+                <p class="text-secondary mb-4">
+                  The framework demonstrates how insights from physics, biology, neuroscience, and information theory converge to provide comprehensive understanding:
+                </p>
+                <ul class="space-y-2 text-secondary">
+                  <li>• Quantum principles underlie both physical and cognitive processes</li>
+                  <li>• Thermodynamic laws govern from cells to cosmos</li>
+                  <li>• Information theory bridges material and mental realms</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="pullquote serif text-center">
+              &#34;This scientific framework for reimagined dualities offers a more accurate and unified model of reality, revealing a cosmos characterized by dynamic interplay, cyclical processes, and interconnectedness rather than simple opposition.&#34;
+            </div>
+
+            <p class="text-lg leading-relaxed mt-8">
+              The implications extend beyond academic understanding to practical applications in technology, medicine, and human flourishing. By grounding dualities in empirical science rather than philosophical abstraction, we gain powerful tools for addressing complex challenges—from quantum computing and climate modeling to mental health and social dynamics. This framework represents not just a new way of thinking about dualities, but a more accurate map of reality itself.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="px-8 py-12 bg-primary text-white">
+        <div class="max-w-4xl mx-auto text-center">
+          <p class="text-sm opacity-80">
+            This report synthesizes findings from physics, biology, neuroscience, and information theory to demonstrate how reimagined dualities offer a more accurate and unified model of reality.
+          </p>
+          <div class="mt-6 text-xs opacity-60">
+            All citations are linked to their original sources for further exploration.
+          </div>
+        </div>
+      </footer>
+    </main>
+
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                // Primary nodes (main concepts) - dark theme
+                primaryColor: '#2c1810',
+                primaryTextColor: '#ffffff',
+                primaryBorderColor: '#2c1810',
+                
+                // Secondary nodes (scientific fields) - medium theme
+                secondaryColor: '#8b5a3c',
+                secondaryTextColor: '#ffffff',
+                secondaryBorderColor: '#8b5a3c',
+                
+                // Tertiary nodes (framework) - darkest theme
+                tertiaryColor: '#4a3426',
+                tertiaryTextColor: '#ffffff',
+                tertiaryBorderColor: '#4a3426',
+                
+                // Background and general styling
+                background: '#fefcf9',
+                mainBkg: '#f5f1eb',
+                secondBkg: '#e5e1db',
+                tertiaryBkg: '#d6d0c7',
+                
+                // Lines and connections
+                lineColor: '#4a3426',
+                edgeLabelBackground: '#fefcf9',
+                
+                // Text styling
+                textColor: '#2c1810',
+                fontFamily: 'Inter, sans-serif',
+                fontSize: '13px',
+                
+                // Ensure good contrast for different node types
+                c0: '#2c1810',  // Darkest for primary nodes
+                c1: '#8b5a3c',  // Medium for secondary nodes  
+                c2: '#4a3426',  // Dark for tertiary nodes
+                c3: '#f5f1eb',  // Light background
+                c4: '#ffffff',  // White for text contrast
+                c5: '#e5e1db',  // Light border
+                c6: '#d6d0c7',  // Medium background
+                
+                // Additional contrast improvements
+                nodeBkg: '#f5f1eb',
+                nodeTextColor: '#2c1810',
+                nodeBorder: '#4a3426',
+                
+                // Cluster styling
+                clusterBkg: '#fefcf9',
+                clusterBorder: '#8b5a3c',
+                
+                // Title and labels
+                titleColor: '#2c1810',
+                edgeLabelColor: '#2c1810'
+            },
+            flowchart: {
+                nodeSpacing: 60,
+                rankSpacing: 80,
+                curve: 'basis',
+                padding: 20,
+                useMaxWidth: true,
+                htmlLabels: true
+            },
+            securityLevel: 'loose'
+        });
+
+        // Initialize Mermaid Controls for zoom and pan
+        function initializeMermaidControls() {
+            const containers = document.querySelectorAll('.mermaid-container');
+
+            containers.forEach(container => {
+            const mermaidElement = container.querySelector('.mermaid');
+            let scale = 1;
+            let isDragging = false;
+            let startX, startY, translateX = 0, translateY = 0;
+
+            // 触摸相关状态
+            let isTouch = false;
+            let touchStartTime = 0;
+            let initialDistance = 0;
+            let initialScale = 1;
+            let isPinching = false;
+
+            // Zoom controls
+            const zoomInBtn = container.querySelector('.zoom-in');
+            const zoomOutBtn = container.querySelector('.zoom-out');
+            const resetBtn = container.querySelector('.reset-zoom');
+            const fullscreenBtn = container.querySelector('.fullscreen');
+
+            function updateTransform() {
+                mermaidElement.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+
+                if (scale > 1) {
+                container.classList.add('zoomed');
+                } else {
+                container.classList.remove('zoomed');
+                }
+
+                mermaidElement.style.cursor = isDragging ? 'grabbing' : 'grab';
+            }
+
+            if (zoomInBtn) {
+                zoomInBtn.addEventListener('click', () => {
+                scale = Math.min(scale * 1.25, 4);
+                updateTransform();
+                });
+            }
+
+            if (zoomOutBtn) {
+                zoomOutBtn.addEventListener('click', () => {
+                scale = Math.max(scale / 1.25, 0.3);
+                if (scale <= 1) {
+                    translateX = 0;
+                    translateY = 0;
+                }
+                updateTransform();
+                });
+            }
+
+            if (resetBtn) {
+                resetBtn.addEventListener('click', () => {
+                scale = 1;
+                translateX = 0;
+                translateY = 0;
+                updateTransform();
+                });
+            }
+
+            if (fullscreenBtn) {
+                fullscreenBtn.addEventListener('click', () => {
+                if (container.requestFullscreen) {
+                    container.requestFullscreen();
+                } else if (container.webkitRequestFullscreen) {
+                    container.webkitRequestFullscreen();
+                } else if (container.msRequestFullscreen) {
+                    container.msRequestFullscreen();
+                }
+                });
+            }
+
+            // Mouse Events
+            mermaidElement.addEventListener('mousedown', (e) => {
+                if (isTouch) return; // 如果是触摸设备，忽略鼠标事件
+
+                isDragging = true;
+                startX = e.clientX - translateX;
+                startY = e.clientY - translateY;
+                mermaidElement.style.cursor = 'grabbing';
+                updateTransform();
+                e.preventDefault();
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (isDragging && !isTouch) {
+                translateX = e.clientX - startX;
+                translateY = e.clientY - startY;
+                updateTransform();
+                }
+            });
+
+            document.addEventListener('mouseup', () => {
+                if (isDragging && !isTouch) {
+                isDragging = false;
+                mermaidElement.style.cursor = 'grab';
+                updateTransform();
+                }
+            });
+
+            document.addEventListener('mouseleave', () => {
+                if (isDragging && !isTouch) {
+                isDragging = false;
+                mermaidElement.style.cursor = 'grab';
+                updateTransform();
+                }
+            });
+
+            // 获取两点之间的距离
+            function getTouchDistance(touch1, touch2) {
+                return Math.hypot(
+                touch2.clientX - touch1.clientX,
+                touch2.clientY - touch1.clientY
+                );
+            }
+
+            // Touch Events - 触摸事件处理
+            mermaidElement.addEventListener('touchstart', (e) => {
+                isTouch = true;
+                touchStartTime = Date.now();
+
+                if (e.touches.length === 1) {
+                // 单指拖动
+                isPinching = false;
+                isDragging = true;
+
+                const touch = e.touches[0];
+                startX = touch.clientX - translateX;
+                startY = touch.clientY - translateY;
+
+                } else if (e.touches.length === 2) {
+                // 双指缩放
+                isPinching = true;
+                isDragging = false;
+
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                initialDistance = getTouchDistance(touch1, touch2);
+                initialScale = scale;
+                }
+
+                e.preventDefault();
+            }, { passive: false });
+
+            mermaidElement.addEventListener('touchmove', (e) => {
+                if (e.touches.length === 1 && isDragging && !isPinching) {
+                // 单指拖动
+                const touch = e.touches[0];
+                translateX = touch.clientX - startX;
+                translateY = touch.clientY - startY;
+                updateTransform();
+
+                } else if (e.touches.length === 2 && isPinching) {
+                // 双指缩放
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                const currentDistance = getTouchDistance(touch1, touch2);
+
+                if (initialDistance > 0) {
+                    const newScale = Math.min(Math.max(
+                    initialScale * (currentDistance / initialDistance),
+                    0.3
+                    ), 4);
+                    scale = newScale;
+                    updateTransform();
+                }
+                }
+
+                e.preventDefault();
+            }, { passive: false });
+
+            mermaidElement.addEventListener('touchend', (e) => {
+                // 重置状态
+                if (e.touches.length === 0) {
+                isDragging = false;
+                isPinching = false;
+                initialDistance = 0;
+
+                // 延迟重置isTouch，避免鼠标事件立即触发
+                setTimeout(() => {
+                    isTouch = false;
+                }, 100);
+                } else if (e.touches.length === 1 && isPinching) {
+                // 从双指变为单指，切换为拖动模式
+                isPinching = false;
+                isDragging = true;
+
+                const touch = e.touches[0];
+                startX = touch.clientX - translateX;
+                startY = touch.clientY - translateY;
+                }
+
+                updateTransform();
+            });
+
+            mermaidElement.addEventListener('touchcancel', (e) => {
+                isDragging = false;
+                isPinching = false;
+                initialDistance = 0;
+
+                setTimeout(() => {
+                isTouch = false;
+                }, 100);
+
+                updateTransform();
+            });
+
+            // Enhanced wheel zoom with better center point handling
+            container.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const rect = container.getBoundingClientRect();
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const delta = e.deltaY > 0 ? 0.9 : 1.1;
+                const newScale = Math.min(Math.max(scale * delta, 0.3), 4);
+
+                // Adjust translation to zoom towards center
+                if (newScale !== scale) {
+                const scaleDiff = newScale / scale;
+                translateX = translateX * scaleDiff;
+                translateY = translateY * scaleDiff;
+                scale = newScale;
+
+                if (scale <= 1) {
+                    translateX = 0;
+                    translateY = 0;
+                }
+
+                updateTransform();
+                }
+            });
+
+            // Initialize display
+            updateTransform();
+            });
+        }
+
+        // Initialize the controls when the DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeMermaidControls();
+        });
+
+        // Table of Contents scroll behavior
+        const tocLinks = document.querySelectorAll('.toc-link');
+        const sections = document.querySelectorAll('[id]');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (window.pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scrolling for TOC links
+        tocLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+
+
+  
+
+</body></html>
